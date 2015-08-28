@@ -1,0 +1,32 @@
+<h1><%= @band.name() %></h1>
+<ul>
+  <% @band.venues().each() do |venue| %>
+    <li>
+      <form class="form-inline" action="/bands/venues/<%= venue.id() %>/delete" method="post">
+        <label for=""><a href="/venues/<%= venue.id() %>"><%= venue.name() %></a></label>
+        <input type="hidden" name="_method" value="delete">
+        <button class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
+<form id="add_venue" action="/bands/<%= @band.id() %>/venues/add" method="post">
+  <div class="form-group">
+    <label for="venue_select">Select a venue this band has played: </label>
+    <select name="venue_id">
+      <% @venues.each() do |venue| %>
+        <option value="<%= venue.id() %>"><%= venue.name() %></option>
+      <% end %>
+    </select>
+  </div>
+  <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+</form>
+
+<form id="update_band" action="/bands/<%= @band.id() %>/update" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="name">See an error? Update this band here: </label>
+    <input class="form-control" type="text" name="name" placeholder="Band Name">
+  </div>
+  <button class="btn btn-primary btn-sm" name="button">Update</button>
+</form>
