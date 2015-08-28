@@ -10,18 +10,21 @@
     </li>
   <% end %>
 </ul>
-<form id="add_venue" action="/bands/<%= @band.id() %>/venues/add" method="post">
-  <div class="form-group">
-    <label for="venue_select">Select a venue this band has played: </label>
-    <select name="venue_id">
-      <% @venues.each() do |venue| %>
-        <option value="<%= venue.id() %>"><%= venue.name() %></option>
-      <% end %>
-    </select>
-  </div>
-  <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-</form>
-
+<% if @venues.any? %>
+  <form id="add_venue" action="/bands/<%= @band.id() %>/venues/add" method="post">
+    <div class="form-group">
+      <label for="venue_id">Select a venue this band has played: </label>
+      <select name="venue_id">
+        <% @venues.each() do |venue| %>
+          <option value="<%= venue.id() %>"><%= venue.name() %></option>
+        <% end %>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+  </form>
+<% else %>
+  <h3>There are no venues to add yet. Add them from the Venue page.</h3>
+<% end %>
 <form id="update_band" action="/bands/<%= @band.id() %>/update" method="post">
   <input type="hidden" name="_method" value="patch">
   <div class="form-group">
