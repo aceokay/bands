@@ -61,6 +61,15 @@ delete('/bands/:id/delete') do
   redirect back
 end
 
+delete('/bands/:band_id/venues/:venue_id/delete') do
+  band_id = params.fetch('band_id').to_i()
+  band = Band.find(band_id)
+  venue_id = params.fetch('venue_id').to_i()
+  venue = Venue.find(venue_id)
+  band.venues.delete(venue)
+  redirect back
+end
+
 delete('/venues/:id/delete') do
   venue_id = params.fetch('id').to_i()
   venue_to_delete = Venue.find(venue_id)

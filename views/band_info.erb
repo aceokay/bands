@@ -2,7 +2,7 @@
 <ul>
   <% @band.venues().each() do |venue| %>
     <li>
-      <form class="form-inline" action="/bands/venues/<%= venue.id() %>/delete" method="post">
+      <form class="form-inline" action="/bands/<%= @band.id() %>/venues/<%= venue.id() %>/delete" method="post">
         <label for=""><a href="/venues/<%= venue.id() %>"><%= venue.name() %></a></label>
         <input type="hidden" name="_method" value="delete">
         <button class="btn btn-danger btn-sm">Delete</button>
