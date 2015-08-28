@@ -10,5 +10,12 @@ describe(Band) do
       new_band = Band.create({:name => "       kendrick lamar "})
       expect(new_band.name).to(eq("Kendrick Lamar"))
     end
+
+    it('does not save a band that has already been saved to the database') do
+      new_band = Band.create({:name => "       kendrick lamar "})
+      new_band2 = Band.create({:name => "   kendrick lamar "})
+      new_band3 = Band.create({:name => "       jay     rock  "})
+      expect(Band.all).to(eq([new_band, new_band3]))
+    end
   end
 end
