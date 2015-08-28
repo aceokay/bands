@@ -1,0 +1,22 @@
+<h1>Venues</h1>
+<% if @venues.empty? %>
+  <h3>You don't have any venues! Add some below.</h3>
+<% else %>
+  <ul>
+    <% @venues.each do |venue| %>
+      <li>
+        <form class="form-inline" action="/venues/<%= venue.id() %>/delete" method="post">
+          <label><a href="/venues/<%= venue.id() %>"><%= venue.name() %></a></label>
+          <input type="hidden" name="_method" value="delete">
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<form action="/venues/add" method="post">
+  <div class="form-group">
+    <input class="form-control" type="text" name="name" placeholder="Venue Name">
+  </div>
+  <button class="btn btn-primary btn-sm" name="button">Add</button>
+</form>
